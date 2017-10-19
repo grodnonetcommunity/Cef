@@ -7,6 +7,13 @@ namespace GDNC.Cef
 {
     public class CSharpBus
     {
+        private readonly IWebBrowser _browser;
+
+        public CSharpBus(IWebBrowser browser)
+        {
+            _browser = browser;
+        }
+
         public string Echo(string echo)
         {
             return echo;
@@ -58,6 +65,20 @@ namespace GDNC.Cef
                     await reject.ExecuteAsync("Error");
                 }
             }
+        }
+
+        public string Alert(string message)
+        {
+            return AlertCore(message).Result;
+        }
+
+        private async Task<string> AlertCore(string message)
+        {
+            await Task.Delay(2000).ConfigureAwait(false);
+
+            await _browser.EvaluateScriptAsync($"alert('{message}');").ConfigureAwait(false);
+
+            return "Done";
         }
     }
 }

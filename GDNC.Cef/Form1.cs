@@ -29,8 +29,8 @@ namespace GDNC.Cef
             };
             Controls.Add(_browser);
 
-            _browser.RegisterJsObject("csharpBus", new CSharpBus());
-            _browser.RegisterAsyncJsObject("csharpBusAsync", new CSharpBus());
+            _browser.RegisterJsObject("csharpBus", new CSharpBus(_browser));
+            _browser.RegisterAsyncJsObject("csharpBusAsync", new CSharpBus(_browser));
         }
 
         protected override void OnLoad(EventArgs e)
