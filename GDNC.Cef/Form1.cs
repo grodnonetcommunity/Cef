@@ -28,6 +28,9 @@ namespace GDNC.Cef
                 Dock = DockStyle.Fill
             };
             Controls.Add(_browser);
+
+            _browser.RegisterJsObject("csharpBus", new CSharpBus());
+            _browser.RegisterAsyncJsObject("csharpBusAsync", new CSharpBus());
         }
 
         protected override void OnLoad(EventArgs e)
